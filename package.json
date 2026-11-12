@@ -1,0 +1,27 @@
+{
+  "name": "rank-anything",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "npm@11.20.0",
+  "description": "Definitively rank a list of items by completing comparisons",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enabledornot/rank-anything.git"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm run mongo:up && concurrently --kill-others --names server,client \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "npm run dev --workspace=client",
+    "dev:server": "npm run dev --workspace=server",
+    "mongo:up": "docker compose up --detach --wait mongo",
+    "mongo:down": "docker compose down",
+    "build": "npm run build --workspaces --if-present",
+    "start": "npm run build --workspace=client && npm run build --workspace=server && npm start --workspace=server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
