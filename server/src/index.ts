@@ -6,7 +6,7 @@ import { createApp } from './app';
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const port = Number(process.env.PORT ?? 3000);
-const app = createApp();
+let app;
 
 async function start(): Promise<void> {
   const mongoUri = process.env.MONGODB_URI?.trim() || getLocalMongoUri();
@@ -16,7 +16,7 @@ async function start(): Promise<void> {
   } else {
     console.log('MongoDB connection is not configured');
   }
-
+  app = createApp();
   app.listen(port, () => {
     console.log(`Express server listening on http://localhost:${port}`);
   });

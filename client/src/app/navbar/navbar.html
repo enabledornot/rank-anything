@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-3">
+    <a class="navbar-brand" routerLink="/">Rank Anything</a>
+
+    <div class="navbar-nav">
+        <a class="nav-link" routerLink="/edit">Edit</a>
+        <a class="nav-link" routerLink="/rank">Rank</a>
+    </div>
+    <div class="navbar-nav ms-auto">
+        <span class="nav-link right">
+            @if (auth.loading()) {
+                Unauthenticated
+            } 
+            @else if (auth.user(); as user) {
+                Logged in as: {{ user.isAnonymous ? 'Guest' : user.username }}
+            }
+        </span>
+    </div>
+</nav>
