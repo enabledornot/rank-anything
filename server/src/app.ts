@@ -4,6 +4,7 @@ import path from 'node:path';
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 import authRouter from './routes/auth';
+import listsRouter from './routes/lists';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
@@ -43,6 +44,8 @@ export function createApp(): Express {
   });
 
   app.use('/api/auth', authRouter);
+
+  app.use('/api/lists', listsRouter);
 
   app.use('/api', (_request, response) => {
     response.status(404).json({ error: 'API route not found' });
