@@ -21,7 +21,6 @@ const listSchema = new Schema<List>(
         },
         description: {
             type: String,
-            required: true,
             trim: true,
             default: ""
         },

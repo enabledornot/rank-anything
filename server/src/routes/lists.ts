@@ -13,7 +13,7 @@ router.get('/user', async (request, response) => {
     if (!userId) {
         return response.status(401).json({ error: 'Not Signed In' });
     }
-    const lists = await ListModel.find({ creatorId: userId });
+    const lists = await ListModel.find({ creatorId: userId }).sort({ updatedAt: -1 });
     return response.json({ lists })
 });
 
@@ -29,6 +29,29 @@ router.post('/', async (request, response) => {
         items: [],
     });
     return response.status(201).json({ list });
+});
+
+router.get('/:listId', async (request, response) => {
+    const userId = request.session.userId;
+    if (!userId) {
+        return response.status(401).json({ error: 'Not Signed In' });
+    }
+
+    const { listId } = request.params;
+
+    if (!Types.ObjectId.isValid(listId)) {
+        return response.status(400).json({ error: 'Invalid list ID' });
+    }
+
+    const list = await ListModel.findOne(
+        { _id: listId, creatorId: userId },
+    );
+
+    if (!list) {
+        return response.status(404).json({ error: 'List not found' });
+    }
+
+    return response.json({ list });
 });
 
 router.patch('/:listId', async (request, response) => {
