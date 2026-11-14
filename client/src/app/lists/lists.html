@@ -62,6 +62,14 @@
                 <label for="list-description" class="form-label">Description</label>
                 <textarea id="list-description" class="form-control" rows="3"
                     [value]="list.description" (input)="updateEditor('description', $any($event.target).value)"></textarea>
+                <p class="form-label">List Items</p>
+                @for (item of list.items.concat(['']); track $index) {
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <input class="form-control mb-3" [value]="item" (input)="updateList($index, $any($event.target).value)">
+                        <button class="btn btn-danger" (click)="updateList($index)">Delete</button>
+                    </div>
+                    
+                }
             </div>
             }
 

@@ -74,6 +74,26 @@ export class Lists implements OnInit {
     this.editedList.set({ ...list, [field]: value });
   }
 
+  updateList(index: number, value?:string): void {
+    const list = this.editedList();
+    if (!list) return;
+
+    let items = [...list.items];
+    if (index === items.length) {
+      if(value) {
+        items.push(value);
+      }
+    }
+    else if (value){
+      items[index] = value;
+    }
+    else {
+      items = items.filter((_, i) => i !== index);
+    }
+    this.editedList.set({ ...list, items });
+    
+  }
+
   saveEditor(): void {
     const list = this.editedList();
     if(list) {
