@@ -15,7 +15,13 @@ Clone the repo
 git clone https://github.com/enabledornot/rank-anything
 ```
 
-Copy the ```.env.example``` file to ```.env``` and set a password
+Copy the ```.env.example``` file to ```.env``` and set a password for mongo and session secret
+
+Run NPM install. You might have to run this again after updates.
+```
+npm install
+```
+
 
 Run the command below. Compose starts MongoDB with a persistent Docker-managed volume, waits for it to become healthy, and then starts both the client and server. MongoDB data uses a Docker-managed volume because MongoDB's WiredTiger storage cannot safely use a Windows host bind mount.
 ```

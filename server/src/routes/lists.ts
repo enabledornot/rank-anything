@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { ListModel } from '../models/list';
-import { request } from 'node:http';
 import { Types } from 'mongoose';
 
 const router = Router();
@@ -89,3 +88,5 @@ router.delete('/:listId', async (request, response) => {
     }
     return response.json({ list });
 })
+
+export default router;
